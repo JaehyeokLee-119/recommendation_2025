@@ -31,25 +31,32 @@ source .venv/bin/activate
 uv sync
 ```
 
-## 학습 실행
+# 이미 생성된 profile로 추천 모델 학습만 할 경우
+기본적으로 Llama-2-7B와 Mistral-7B (둘 다 instsruction-tuned model) 생성된 profile이 준비되어 있음
+(`user_profiles`)
 
-학습을 시작하려면 다음 명령어를 실행하세요:
+`user_profiles/amazon_profiles.json`와 `user_profiles/trip_advisor_profiles.json`는 llama로,
 
-```bash
-./train.sh
+같은 폴더의 뒤에 mistral이 붙은 이름의 파일은 mistral로 생성된 것
+
+## Train 
+이를 활용해서 학습하는 코드: `train.sh`
+## Evaluation
+이를 활용해서 평가하는 코드: `test.sh`<br>
+테스트 결과 예시: `./results/`에 있음
+
+# 처음부터 구현해서 실험 시의 workflow
+## Generating User Profiles
+
+Llama-2-7B 혹은 mistral 7B 모델로 유저 프로필을 생성해야 함. 
+생성된 프로필은 `user_profiles` 폴더에 저장됨.
+### Data Preprocess
+```
+python preprocess.py
 ```
 
-## 프로젝트 구조
+### 자연어 프로필 생성
 ```
-.
-├── README.md
-├── requirements.txt
-├── train.sh
-└── src/
-    └── ...
+python generate_profile.py
 ```
-
-## 주의사항
-- 학습을 시작하기 전에 필요한 데이터셋이 올바른 위치에 있는지 확인하세요.
-- GPU 메모리가 충분한지 확인하세요.
-- 학습 중 발생하는 로그는 `logs` 디렉토리에서 확인할 수 있습니다. 
+이후는 train및 test 진행
