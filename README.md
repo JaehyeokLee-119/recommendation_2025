@@ -39,7 +39,7 @@ uv sync
 이름 뒤쪽에 mistral이 붙은 파일들은 mistral로 생성된 것
 
 ## Train 
-생성된 프로필을 활용해서 학습하는 코드: `train.sh`
+생성된 프로필을 활용해서 학습하는 코드: `train.sh` (사용할 GPU 번호 설정과 HuggingFace token 입력 필요)
 ## Evaluation
 학습된 모델을 평가하는 코드: `test.sh`<br>
 테스트 결과 예시: `./results/`에 있음
